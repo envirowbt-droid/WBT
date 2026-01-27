@@ -22,8 +22,21 @@
         .top-bar a { color: white; text-decoration: none; margin-right: 15px; }
 
         /* Navbar */
-        .navbar-brand img { height: 60px; } /* Adjust logo size */
+        .navbar-brand img { height: 70px; } /* Logo size */
         .navbar { box-shadow: 0 2px 10px rgba(0,0,0,0.1); background: white; }
+
+        /* Hero Section */
+        .hero-section {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('images/4etp.jpeg');
+            background-size: cover;
+            background-position: center;
+            height: 60vh;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
 
         /* Sidebar Styling */
         .sidebar { background: #fff; border-right: 1px solid #ddd; height: 100%; }
@@ -32,7 +45,7 @@
             background-color: var(--primary-color); 
             color: white; 
             border-color: var(--primary-color);
-            padding-left: 25px; /* Slight slide effect */
+            padding-left: 25px;
         }
         .list-group-item i { margin-right: 10px; color: var(--secondary-color); }
         .list-group-item:hover i, .list-group-item.active i { color: white; }
@@ -44,16 +57,19 @@
 
         /* Roller / Marquee for Clients */
         .marquee-container { overflow: hidden; white-space: nowrap; padding: 40px 0; background: #f1f1f1; }
-        .marquee-content { display: inline-block; animation: scroll 30s linear infinite; }
+        .marquee-content { display: inline-block; animation: scroll 40s linear infinite; }
         .client-logo { 
-            height: 80px; /* Fixed height for all logos */
+            height: 80px; 
             width: auto; 
-            margin: 0 40px; 
-            filter: grayscale(100%); 
+            margin: 0 30px; 
+            filter: grayscale(0%); /* Show original colors */
             transition: 0.3s;
             vertical-align: middle;
+            background: white;
+            padding: 5px;
+            border-radius: 5px;
         }
-        .client-logo:hover { filter: grayscale(0%); transform: scale(1.1); }
+        .client-logo:hover { transform: scale(1.1); }
 
         @keyframes scroll {
             0% { transform: translateX(0); }
@@ -76,12 +92,21 @@
         .btn-submit:hover { background: #218838; }
 
         /* Map */
-        .map-container iframe { width: 100%; height: 350px; border: 0; }
+        .map-container { position: relative; width: 100%; height: 350px; overflow: hidden; border-radius: 8px; }
+        .map-container iframe { width: 100%; height: 100%; border: 0; }
+        .map-overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.1); cursor: pointer; display: flex;
+            align-items: center; justify-content: center; opacity: 0; transition: 0.3s;
+        }
+        .map-container:hover .map-overlay { opacity: 1; background: rgba(0,0,0,0.3); }
+        .open-map-btn { background: white; color: #333; padding: 10px 20px; font-weight: bold; border-radius: 50px; }
 
         /* Mobile Fixes */
         @media (max-width: 768px) {
-            .sidebar { display: none; } /* Hide sidebar on mobile, show only content */
+            .sidebar { display: none; } /* Hide sidebar on mobile */
             .navbar-brand img { height: 50px; }
+            .hero-section { height: 40vh; }
         }
     </style>
 </head>
@@ -91,11 +116,11 @@
         <div class="container d-flex justify-content-between align-items-center">
             <div>
                 <i class="fas fa-envelope me-2"></i> info@wbtenviro.com
-                <span class="mx-3">|</span>
+                <span class="mx-2">|</span>
                 <i class="fas fa-phone-alt me-2"></i> +91-8019257901
             </div>
             <div class="d-none d-md-block">
-                <span>Working Hours: Mon-Sat 10:00 AM - 6:30 PM</span>
+                <span><i class="fas fa-clock me-1"></i> Mon-Sat 10:00 AM - 6:30 PM</span>
             </div>
         </div>
     </div>
@@ -103,7 +128,7 @@
     <nav class="navbar navbar-expand-lg navbar-light sticky-top">
         <div class="container">
             <a class="navbar-brand fw-bold" href="#">
-                <img src="images/logo.png" alt="WBT Enviro Solutions"> 
+                <img src="images/mylogo.png" alt="WBT Enviro Solutions"> 
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
@@ -119,12 +144,11 @@
         </div>
     </nav>
 
-    <header id="home" class="text-center text-white d-flex align-items-center justify-content-center" 
-            style="background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('images/banner.jpg'); background-size: cover; background-position: center; height: 60vh;">
+    <header id="home" class="hero-section">
         <div class="container">
             <h1 class="display-4 fw-bold">WBT Enviro Solutions Pvt Ltd</h1>
-            <p class="lead">Specialized Engineering for Water, Wastewater & Waste-to-Energy</p>
-            <a href="#contact" class="btn btn-success btn-lg mt-3">Get a Free Quote</a>
+            <p class="lead mb-4">Specialized Engineering for Water, Wastewater & Waste-to-Energy</p>
+            <a href="#contact" class="btn btn-success btn-lg">Get a Free Quote</a>
         </div>
     </header>
 
@@ -135,3 +159,233 @@
                 <div class="sidebar p-3 sticky-top" style="top: 90px; z-index: 1;">
                     <h5 class="mb-3 text-primary">Our Solutions</h5>
                     <div class="list-group" id="list-tab" role="tablist">
+                        <a class="list-group-item list-group-item-action active" href="#etp"><i class="fas fa-water"></i> ETP Plant</a>
+                        <a class="list-group-item list-group-item-action" href="#stp"><i class="fas fa-leaf"></i> STP Solutions</a>
+                        <a class="list-group-item list-group-item-action" href="#biodigester"><i class="fas fa-burn"></i> Bio-Digester</a>
+                        <a class="list-group-item list-group-item-action" href="#ro"><i class="fas fa-tint"></i> RO & Recycling</a>
+                        <a class="list-group-item list-group-item-action" href="#om"><i class="fas fa-tools"></i> O&M Services</a>
+                        <a class="list-group-item list-group-item-action" href="#chemicals"><i class="fas fa-flask"></i> Chemicals</a>
+                        <a class="list-group-item list-group-item-action" href="#equipment"><i class="fas fa-cogs"></i> Equipment</a>
+                        <a class="list-group-item list-group-item-action" href="#lab"><i class="fas fa-microscope"></i> Lab Instruments</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-9">
+                
+                <div class="mb-5">
+                    <h2 class="section-title">About Us</h2>
+                    <p>WBT Enviro Solutions Pvt Ltd is a specialized engineering company focused on water and wastewater treatment solutions. We deliver end-to-end services including design, engineering, supply, installation, commissioning, O&M and AMC with strong technical and service support.</p>
+                    <div class="row text-center mt-4">
+                        <div class="col-6 col-md-4 mb-3">
+                            <div class="p-3 border rounded bg-light"><strong><i class="fas fa-check-circle text-success"></i> Strong Design</strong></div>
+                        </div>
+                        <div class="col-6 col-md-4 mb-3">
+                            <div class="p-3 border rounded bg-light"><strong><i class="fas fa-check-circle text-success"></i> Experienced Team</strong></div>
+                        </div>
+                        <div class="col-6 col-md-4 mb-3">
+                            <div class="p-3 border rounded bg-light"><strong><i class="fas fa-check-circle text-success"></i> Reliable Supply</strong></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="etp" class="product-section">
+                    <h3 class="fw-bold text-dark">Effluent Treatment Plant (ETP)</h3>
+                    <img src="images/4etp.jpeg" alt="ETP Plant" class="product-img">
+                    <p>Design, engineering, supply, installation, commissioning and O&M services for industrial wastewater treatment with customized solutions.</p>
+                    <a href="#contact" class="btn btn-sm btn-outline-primary">Inquire Now</a>
+                </div>
+
+                <div id="stp" class="product-section">
+                    <h3 class="fw-bold text-dark">Sewage Treatment Plant (STP)</h3>
+                    <img src="images/9stp.jpeg" alt="STP Plant" class="product-img">
+                    <p>Complete STP solutions using MBBR, SBR and ASP technologies for commercial and institutional applications.</p>
+                    <a href="#contact" class="btn btn-sm btn-outline-primary">Inquire Now</a>
+                </div>
+
+                <div id="biodigester" class="product-section">
+                    <h3 class="fw-bold text-dark">Anaerobic Bio-Digester (Waste to Energy)</h3>
+                    <img src="images/1biogas.jpeg" alt="Bio Digester" class="product-img">
+                    <p>End-to-end waste-to-energy solutions converting organic waste and high-COD wastewater into biogas with long-term O&M support.</p>
+                    <a href="#contact" class="btn btn-sm btn-outline-primary">Inquire Now</a>
+                </div>
+
+                <div id="ro" class="product-section">
+                    <h3 class="fw-bold text-dark">RO Plants & Water Recycling</h3>
+                    <img src="images/7roplant.jpeg" alt="RO Plant" class="product-img">
+                    <p>Industrial RO systems and treated water recycling solutions for process reuse and water conservation.</p>
+                    <a href="#contact" class="btn btn-sm btn-outline-primary">Inquire Now</a>
+                </div>
+
+                <div id="om" class="product-section">
+                    <h3 class="fw-bold text-dark">O&M and AMC Services</h3>
+                    <img src="images/2amc.jpeg" alt="O&M Services" class="product-img">
+                    <p>Complete plant operation, maintenance, troubleshooting, manpower supply and annual maintenance contracts.</p>
+                    <a href="#contact" class="btn btn-sm btn-outline-primary">Inquire Now</a>
+                </div>
+
+                <div id="chemicals" class="product-section">
+                    <h3 class="fw-bold text-dark">Chemicals Supply</h3>
+                    <img src="images/3chemicals.png" alt="Chemicals" class="product-img">
+                    <p>Supply of ETP, STP, RO, cooling tower and boiler water treatment chemicals.</p>
+                    <a href="#contact" class="btn btn-sm btn-outline-primary">Inquire Now</a>
+                </div>
+
+                <div id="equipment" class="product-section">
+                    <h3 class="fw-bold text-dark">Electromechanical Equipment</h3>
+                    <img src="images/5electromechanical.png" alt="Spares" class="product-img">
+                    <p>Supply of Pumps, Blowers, Agitators, Dosing systems, Panels, Instruments and Spares.</p>
+                    <a href="#contact" class="btn btn-sm btn-outline-primary">Inquire Now</a>
+                </div>
+
+                 <div id="lab" class="product-section">
+                    <h3 class="fw-bold text-dark">Laboratory Equipment</h3>
+                    <img src="images/6laboratory.png" alt="Lab" class="product-img">
+                    <p>Water & wastewater testing instruments with supply and servicing support.</p>
+                    <a href="#contact" class="btn btn-sm btn-outline-primary">Inquire Now</a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <section id="clients" class="py-5 bg-light">
+        <div class="container text-center mb-4">
+            <h2 class="section-title border-0">Our Esteemed Clients</h2>
+        </div>
+        <div class="marquee-container">
+            <div class="marquee-content">
+                <img src="images/logo1.png" class="client-logo" alt="Client 1">
+                <img src="images/logo2.png" class="client-logo" alt="Client 2">
+                <img src="images/logo3.png" class="client-logo" alt="Client 3">
+                <img src="images/logo4.png" class="client-logo" alt="Client 4">
+                <img src="images/logo5.png" class="client-logo" alt="Client 5">
+                <img src="images/logo6.png" class="client-logo" alt="Client 6">
+                <img src="images/logo7.png" class="client-logo" alt="Client 7">
+                <img src="images/logo8.png" class="client-logo" alt="Client 8">
+                <img src="images/logo9.png" class="client-logo" alt="Client 9">
+                <img src="images/logo10.png" class="client-logo" alt="Client 10">
+                <img src="images/logo11.png" class="client-logo" alt="Client 11">
+                <img src="images/logo12.png" class="client-logo" alt="Client 12">
+                <img src="images/logo13.png" class="client-logo" alt="Client 13">
+                <img src="images/logo14.png" class="client-logo" alt="Client 14">
+                
+                <img src="images/logo1.png" class="client-logo" alt="Client 1">
+                <img src="images/logo2.png" class="client-logo" alt="Client 2">
+                <img src="images/logo3.png" class="client-logo" alt="Client 3">
+                <img src="images/logo4.png" class="client-logo" alt="Client 4">
+                <img src="images/logo5.png" class="client-logo" alt="Client 5">
+                <img src="images/logo6.png" class="client-logo" alt="Client 6">
+                <img src="images/logo7.png" class="client-logo" alt="Client 7">
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <div class="contact-box h-100">
+                        <h3>Contact Us</h3>
+                        <p>Fill the form below or call us directly.</p>
+                        
+                        <form action="https://formspree.io/f/xbjnqylz" method="POST"> 
+                            <div class="mb-3">
+                                <input type="text" name="name" class="form-control" placeholder="Your Name" required>
+                            </div>
+                            <div class="mb-3">
+                                <input type="text" name="company" class="form-control" placeholder="Company Name" required>
+                            </div>
+                            <div class="mb-3">
+                                <input type="tel" name="phone" class="form-control" placeholder="Phone / WhatsApp" required>
+                            </div>
+                            <div class="mb-3">
+                                <select name="service" class="form-control">
+                                    <option value="" disabled selected>Service Required</option>
+                                    <option>ETP Plant</option>
+                                    <option>STP Plant</option>
+                                    <option>RO Plant</option>
+                                    <option>O&M Services</option>
+                                    <option>Chemicals</option>
+                                    <option>Others</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <textarea name="message" class="form-control" rows="3" placeholder="Requirement Message"></textarea>
+                            </div>
+                            <button type="submit" class="btn-submit">SEND INQUIRY</button>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <div class="card-body">
+                            <h4><i class="fas fa-map-marker-alt text-primary"></i> Visit Us</h4>
+                            <p>
+                                <strong>WBT Enviro Solutions Pvt Ltd</strong><br>
+                                B-20A, Globus-D, Block-H1A,<br>
+                                Sector-63, Noida – 201305<br>
+                                NCR, India
+                            </p>
+                            <p><i class="fas fa-envelope text-primary"></i> info@wbtenviro.com</p>
+                            <p><i class="fas fa-phone text-primary"></i> +91-8019257901</p>
+
+                            <div class="map-container mt-3">
+                                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3502.112104595232!2d77.3789433150824!3d28.62639498241984!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390ce550dc38d351%3A0x6b4474921606117!2sSector%2063%2C%20Noida%2C%20Uttar%20Pradesh!5e0!3m2!1sen!2sin!4v1626084000000!5m2!1sen!2sin" allowfullscreen="" loading="lazy"></iframe>
+                                
+                                <a href="https://www.google.com/maps/search/?api=1&query=WBT+Enviro+Solutions+Pvt+Ltd+Noida+Sector+63" target="_blank" class="map-overlay">
+                                    <span class="open-map-btn"><i class="fas fa-location-arrow"></i> Open in Maps</span>
+                                </a>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-dark text-white text-center py-3">
+        <p class="m-0">© 2024 WBT Enviro Solutions Pvt Ltd. All Rights Reserved.</p>
+    </footer>
+
+    <a href="https://wa.me/918019257901?text=Hello,%20I%20am%20interested%20in%20water%20%26%20wastewater%20treatment%20solutions." class="floating-whatsapp" target="_blank">
+        <i class="fab fa-whatsapp"></i> Chat Now
+    </a>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Smooth scroll adjustment for fixed header
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Highlight Sidebar on Scroll
+        const sections = document.querySelectorAll('.product-section');
+        const navLi = document.querySelectorAll('.list-group-item');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (scrollY >= sectionTop - 150) {
+                    current = section.getAttribute('id');
+                }
+            });
+            navLi.forEach(li => {
+                li.classList.remove('active');
+                if (li.getAttribute('href').includes(current)) {
+                    li.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
