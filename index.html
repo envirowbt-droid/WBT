@@ -17,15 +17,16 @@
             --light-bg: #f8f9fa;
         }
 
-        /* Fix 3: Standard Viewport settings are handled in meta tag, ensuring font size is legible */
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; overflow-x: hidden; font-size: 16px; }
+        /* FIX 1: Prevent Horizontal Scrolling (Swipe Issue) */
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            overflow-x: hidden; 
+            font-size: 16px; 
+        }
 
         /* Top Bar */
         .top-bar { background-color: var(--primary-color); color: white; padding: 10px 0; font-size: 0.9rem; }
         .top-bar a { color: white; text-decoration: none; margin-right: 15px; }
-        
-        /* Fix 1: Flip Call Icon */
-        .fa-phone { transform: scaleX(-1); }
 
         /* Navbar */
         .navbar-brand img { height: 70px; } 
@@ -38,14 +39,12 @@
             .navbar-nav .btn:hover { color: var(--primary-color); background: none; }
         }
 
-        /* Fix 5: Banner Image Size & Position */
+        /* FIX 3: Banner Size Reverted to 60vh */
         .hero-section {
-            /* Using .jpeg as per your latest file update */
             background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('images/banner1.jpeg');
             background-size: cover;
-            /* Position top to show sky/details, Height increased for 3000x2000px ratio */
             background-position: center top; 
-            height: 75vh; 
+            height: 60vh; 
             color: white;
             display: flex;
             align-items: center;
@@ -53,16 +52,19 @@
             text-align: center;
         }
 
-        /* Section Styling */
+        /* FIX 2: Section Title - Inline Block to keep Green Line attached when centered */
         .section-title { 
             color: var(--primary-color); 
             border-left: 5px solid var(--secondary-color); 
             padding-left: 15px; 
             margin-bottom: 20px; 
-            display: inline-block;
+            display: inline-block; /* Keeps border with text */
+            text-align: left;
         }
+        
+        /* Centered Section Styling */
         .centered-section { text-align: center; }
-        .centered-section .section-title { border-left: none; border-bottom: 3px solid var(--secondary-color); padding-bottom: 10px; }
+        .centered-section .section-title { border-left: none; border-bottom: 3px solid var(--secondary-color); padding-bottom: 10px; display: inline-block; padding-left: 0; }
 
         /* Service Grid */
         .service-card {
@@ -127,12 +129,8 @@
         .btn-submit { background: var(--secondary-color); border: none; color: white; padding: 12px 30px; font-weight: bold; width: 100%; transition: 0.3s; }
         .btn-submit:hover { background: #218838; }
 
-        /* Fix 2: Map - 100% Width, standard height */
+        /* Map */
         .map-container iframe { width: 100%; height: 350px; border: 0; border-radius: 8px; }
-
-        /* Fix 4: About Us Alignment - Header Center, Body Left */
-        .about-heading { text-align: center; }
-        .about-body { text-align: left; }
 
         /* Footer Link */
         .dev-link { color: #aaa; text-decoration: none; font-size: 0.8rem; }
@@ -146,7 +144,7 @@
             <div>
                 <i class="fas fa-envelope me-2"></i> info@wbtenviro.com
                 <span class="mx-2">|</span>
-                <i class="fas fa-phone me-2"></i> <strong>+91-8019257901</strong>
+                <i class="fas fa-phone-volume me-2"></i> <strong>+91-8019257901</strong>
             </div>
             <div class="d-none d-md-block">
                 <span><i class="fas fa-clock me-1"></i> Mon–Sat 10:00 AM to 6:30 PM (Sun Closed)</span>
@@ -185,9 +183,9 @@
 
     <section id="about" class="py-5">
         <div class="container" data-aos="fade-up">
-            <div class="mb-4">
-                <h2 class="section-title about-heading w-100 text-center">About Us</h2>
-                <p class="lead about-body text-start">WBT Enviro Solutions Pvt Ltd is a specialized engineering company focused on water and wastewater treatment solutions. We deliver end-to-end services including design, engineering, supply, installation, commissioning, O&M and AMC with strong technical and service support.</p>
+            <div class="mb-4 text-center">
+                <h2 class="section-title">About Us</h2>
+                <p class="lead text-start">WBT Enviro Solutions Pvt Ltd is a specialized engineering company focused on water and wastewater treatment solutions. We deliver end-to-end services including design, engineering, supply, installation, commissioning, O&M and AMC with strong technical and service support.</p>
             </div>
         </div>
     </section>
@@ -428,8 +426,8 @@
                             <h4><i class="fas fa-map-marker-alt text-primary"></i> Contact Us</h4>
                             
                             <div class="mb-3">
-                                <p class="mb-1"><i class="fas fa-phone-alt text-primary"></i> <strong>+91-8019257901</strong></p>
-                                <p class="mb-1"><i class="fas fa-phone text-primary"></i> 120-4957760</p>
+                                <p class="mb-1"><i class="fas fa-phone-volume text-primary"></i> <strong>+91-8019257901</strong></p>
+                                <p class="mb-1"><i class="fas fa-phone-volume text-primary"></i> 120-4957760</p>
                                 <p class="mb-1"><i class="fas fa-envelope text-primary"></i> info@wbtenviro.com</p>
                                 <p class="mb-3"><i class="fas fa-envelope text-primary"></i> solutions@wbtenviro.com</p>
                             </div>
@@ -443,7 +441,7 @@
                             
                             <div class="map-container mt-3">
                                 <iframe 
-                                    src="https://maps.google.com/maps?q=WBT+Enviro+Solutions+Pvt+Ltd+Sector-63+Noida&t=&z=13&ie=UTF8&iwloc=&output=embed" 
+                                    src="https://maps.google.com/maps?q=WBT+Enviro+Solutions+Pvt+Ltd,+B-20A,+Globus-D,+Block-H1A,+Sector-63,+Noida&t=&z=13&ie=UTF8&iwloc=&output=embed" 
                                     allowfullscreen="" loading="lazy">
                                 </iframe>
                                 <div class="mt-2 text-center">
