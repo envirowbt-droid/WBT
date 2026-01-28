@@ -4,138 +4,260 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WBT Enviro Solutions Pvt Ltd</title>
+    
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css" rel="stylesheet">
-    
+
     <style>
-        /* --- CUSTOM STYLES --- */
+        /* General Styles */
         :root {
-            --primary-color: #0056b3; /* Blue */
-            --secondary-color: #28a745; /* Green */
+            --primary-green: #00b894;
+            --dark-gray: #333;
             --light-bg: #f8f9fa;
         }
-
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; overflow-x: hidden; }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow-x: hidden;
+        }
 
         /* Top Bar */
-        .top-bar { background-color: var(--primary-color); color: white; padding: 10px 0; font-size: 0.9rem; }
-        .top-bar a { color: white; text-decoration: none; margin-right: 15px; }
+        .top-bar {
+            background-color: #0056b3; /* Blue color from screenshot */
+            color: white;
+            padding: 8px 0;
+            font-size: 14px;
+        }
+        .top-bar a {
+            color: white;
+            text-decoration: none;
+            margin-right: 15px;
+        }
+        .top-bar i {
+            margin-right: 5px;
+            /* FIX 2: Ensure phone icon is not rotated */
+            transform: none !important; 
+        }
 
         /* Navbar */
-        .navbar-brand img { height: 70px; } 
-        .navbar { box-shadow: 0 2px 10px rgba(0,0,0,0.1); background: white; }
+        .navbar {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .navbar-brand img {
+            max-height: 70px; /* Adjust logo size */
+        }
+        .nav-link {
+            color: #333;
+            font-weight: 500;
+            margin: 0 10px;
+        }
+        .nav-link:hover {
+            color: var(--primary-green);
+        }
+        
+        /* FIX 9: Mobile Menu Alignment */
+        @media (max-width: 991px) {
+            .navbar-nav {
+                text-align: left; /* Ensures all items align left */
+                padding-left: 15px;
+            }
+            .nav-item {
+                border-bottom: 1px solid #eee;
+                padding: 10px 0;
+            }
+        }
 
-        /* Hero Section */
+        /* Hero Banner */
         .hero-section {
-            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('images/banner1.jpg');
-            background-size: cover;
-            background-position: center;
-            height: 65vh;
-            color: white;
+            position: relative;
+            /* FIX 2: Banner Image Path */
+            background: url('images/banner1.jpg') no-repeat center center/cover;
+            height: 90vh;
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
+            color: white;
+        }
+        .hero-overlay {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0, 0, 0, 0.6); /* Darkens banner for text readability */
+        }
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            padding: 20px;
+        }
+        .hero-title {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        .btn-custom {
+            background-color: var(--primary-green);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        .btn-custom:hover {
+            background-color: #019678;
+            color: white;
         }
 
-        /* Section Styling */
-        .section-title { 
-            color: var(--primary-color); 
-            border-left: 5px solid var(--secondary-color); 
-            padding-left: 15px; 
-            margin-bottom: 20px; 
+        /* Headings with Green Line */
+        .section-title {
+            position: relative;
             display: inline-block;
+            margin-bottom: 30px;
+            font-weight: bold;
+            color: #0056b3;
         }
-        .centered-section { text-align: center; }
-        .centered-section .section-title { border-left: none; border-bottom: 3px solid var(--secondary-color); padding-bottom: 10px; }
+        /* FIX 5 & 6: Green Line Logic */
+        .section-title::before {
+            content: '';
+            position: absolute;
+            left: -15px;
+            top: 5px;
+            bottom: 5px;
+            width: 5px;
+            background-color: var(--primary-green);
+        }
 
-        /* Service Grid (Replaces Sidebar) */
+        /* About Us */
+        .about-text {
+            text-align: justify;
+        }
+        /* FIX 8: Mobile Left Alignment for About Us */
+        @media (max-width: 768px) {
+            .about-text {
+                text-align: left !important;
+            }
+            .section-title::before {
+                left: -10px; /* Slight adjustment for mobile */
+            }
+        }
+
+        /* Services */
         .service-card {
             border: 1px solid #eee;
-            border-radius: 8px;
             padding: 20px;
-            text-align: center;
-            transition: 0.3s;
-            height: 100%;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            transition: transform 0.3s;
             background: white;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-            text-decoration: none;
-            display: block;
-            color: #333;
         }
-        .service-card:hover { transform: translateY(-5px); box-shadow: 0 5px 15px rgba(0,0,0,0.1); border-color: var(--primary-color); }
-        .service-card i { font-size: 2rem; color: var(--secondary-color); margin-bottom: 10px; }
-        .service-card h5 { font-size: 1.1rem; font-weight: bold; }
-
-        /* Product Details */
-        .product-section { padding: 40px 0; border-bottom: 1px solid #eee; scroll-margin-top: 100px; max-width: 900px; margin: 0 auto; text-align: center; }
-        .product-img { width: 100%; max-height: 400px; object-fit: cover; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); margin-bottom: 20px; }
-        
-        /* Projects List */
-        .project-item { background: white; padding: 15px; margin-bottom: 10px; border-left: 4px solid var(--primary-color); box-shadow: 0 2px 4px rgba(0,0,0,0.05); text-align: left; }
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
 
         /* Gallery */
-        .gallery-img { width: 100%; height: 120px; object-fit: cover; border-radius: 5px; transition: 0.3s; cursor: pointer; }
-        .gallery-img:hover { transform: scale(1.05); opacity: 0.8; }
-
-        /* Roller / Marquee for Clients */
-        .marquee-container { overflow: hidden; white-space: nowrap; padding: 40px 0; background: #f1f1f1; }
-        .marquee-content { display: inline-block; animation: scroll 40s linear infinite; }
-        .client-logo { 
-            height: 80px; 
-            width: auto; 
-            margin: 0 30px; 
-            background: white;
-            padding: 5px;
+        .gallery-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
             border-radius: 5px;
-            vertical-align: middle;
+            margin-bottom: 20px;
+            transition: transform 0.3s;
+        }
+        .gallery-img:hover {
+            transform: scale(1.05);
         }
 
-        @keyframes scroll {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
+        /* Why Choose Us */
+        .choose-list {
+            list-style: none;
+            padding: 0;
+        }
+        .choose-list li {
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+        }
+        .choose-list li i {
+            color: var(--primary-green);
+            margin-right: 15px;
+            font-size: 1.2rem;
         }
 
-        /* Floating WhatsApp */
-        .floating-whatsapp {
-            position: fixed; bottom: 20px; right: 20px; background: #25D366; color: white;
-            padding: 15px 20px; border-radius: 50px; font-size: 18px; font-weight: bold;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3); text-decoration: none; z-index: 1000;
-            display: flex; align-items: center; gap: 10px; transition: 0.3s;
+        /* Clients */
+        .client-logo {
+            max-height: 80px;
+            margin: 20px;
+            filter: grayscale(100%);
+            transition: 0.3s;
+            opacity: 0.7;
         }
-        .floating-whatsapp:hover { transform: translateY(-5px); background: #1ebd56; color: white;}
+        .client-logo:hover {
+            filter: grayscale(0%);
+            opacity: 1;
+        }
 
-        /* Contact Form */
-        .contact-box { background: var(--primary-color); color: white; padding: 40px; border-radius: 10px; }
-        .form-control { border-radius: 0; border: none; padding: 12px; }
-        .btn-submit { background: var(--secondary-color); border: none; color: white; padding: 12px 30px; font-weight: bold; width: 100%; transition: 0.3s; }
-        .btn-submit:hover { background: #218838; }
-
-        /* Map */
-        .map-container iframe { width: 100%; height: 350px; border: 0; border-radius: 8px; }
+        /* Contact / Footer */
+        footer {
+            background-color: #f1f1f1;
+            padding: 40px 0 10px 0;
+            text-align: center;
+        }
+        .footer-credit {
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: #666;
+        }
+        .footer-credit a {
+            color: #0056b3;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        
+        /* Floating WhatsApp Button */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #25d366;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            z-index: 1000;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .whatsapp-float:hover {
+            color: white;
+            background-color: #1ebc57;
+        }
     </style>
 </head>
 <body>
 
     <div class="top-bar">
-        <div class="container d-flex justify-content-between align-items-center flex-wrap">
-            <div>
-                <i class="fas fa-envelope me-2"></i> info@wbtenviro.com
-                <span class="mx-2">|</span>
-                <i class="fas fa-phone-alt me-2"></i> +91-8019257901
+        <div class="container d-flex justify-content-between align-items-center">
+            <div class="contact-info">
+                <a href="mailto:info@wbtenviro.com"><i class="fa fa-envelope"></i> info@wbtenviro.com</a>
+                <a href="tel:+918019257901"><i class="fa fa-phone-alt"></i> +91-8019257901</a>
             </div>
-            <div class="d-none d-md-block">
-                <span><i class="fas fa-clock me-1"></i> Mon–Sat 10:00 AM to 6:30 PM (Sun Closed)</span>
+            <div class="hours d-none d-md-block">
+                <i class="fa fa-clock"></i> Mon-Sat 10:00 AM to 6:30 PM (Sun Closed)
             </div>
         </div>
     </div>
 
-    <nav class="navbar navbar-expand-lg navbar-light sticky-top">
+    <nav class="navbar navbar-expand-lg sticky-top">
         <div class="container">
             <a class="navbar-brand" href="#">
-                <img src="images/mylogo.png" alt="WBT Enviro Solutions"> 
+                <img src="images/logo1.png" alt="WBT Logo">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
@@ -145,320 +267,169 @@
                     <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
                     <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
                     <li class="nav-item"><a class="nav-link" href="#gallery">Gallery</a></li>
-                    <li class="nav-item"><a class="nav-link btn btn-outline-primary ms-2" href="#contact">Contact Us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact Us</a></li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <header id="home" class="hero-section">
-        <div class="container" data-aos="fade-up">
-            <h1 class="display-4 fw-bold">WBT Enviro Solutions Pvt Ltd</h1>
-            <p class="lead mb-4">Specialized Engineering for Water, Wastewater & Waste-to-Energy</p>
-            <a href="#contact" class="btn btn-success btn-lg">Get a Free Quote</a>
+    <section id="home" class="hero-section">
+        <div class="hero-overlay"></div>
+        <div class="hero-content" data-aos="fade-up">
+            <h1 class="hero-title">WBT Enviro Solutions Pvt Ltd</h1>
+            <p class="lead">Specialized Engineering for Water, Wastewater & Waste-to-Energy</p>
+            <a href="#contact" class="btn-custom mt-3">Get a Free Quote</a>
         </div>
-    </header>
+    </section>
 
     <section id="about" class="py-5">
-        <div class="container" data-aos="fade-up">
-            <div class="text-center mb-4">
-                <h2 class="section-title">About Us</h2>
-                <p class="lead">WBT Enviro Solutions Pvt Ltd is a specialized engineering company focused on water and wastewater treatment solutions. We deliver end-to-end services including design, engineering, supply, installation, commissioning, O&M and AMC with strong technical and service support.</p>
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-12 text-center mb-4">
+                    <h2 class="section-title" data-aos="fade-right">About Us</h2>
+                </div>
+                <div class="col-md-8 offset-md-2 about-text" data-aos="fade-up">
+                    <p>
+                        WBT Enviro Solutions Pvt Ltd is a specialized engineering company focused on water and wastewater treatment solutions. We deliver end-to-end services including design, engineering, supply, installation, commissioning, O&M and AMC with strong technical and service support.
+                    </p>
+                </div>
             </div>
-            
-            <div class="row justify-content-center">
-                <div class="col-md-8">
-                    <div class="bg-light p-4 rounded shadow-sm">
-                        <h4 class="text-primary mb-3 text-center">Why Choose Us</h4>
-                        <ul class="list-unstyled">
-                            <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i> Specialized in water & wastewater treatment</li>
-                            <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i> Strong design & execution capability</li>
-                            <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i> Experienced O&M and service team</li>
-                            <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i> Reliable equipment & chemical supply</li>
-                            <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i> Focus on long-term plant performance</li>
-                        </ul>
+        </div>
+    </section>
+
+    <section id="services" class="py-5 bg-light">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-title" data-aos="fade-right">Our Services</h2>
+            </div>
+            <div class="row">
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="service-card text-center">
+                        <i class="fa fa-water fa-3x text-success mb-3"></i>
+                        <h5>100 KLD STP Plant Supply</h5>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="service-card text-center">
+                        <i class="fa fa-filter fa-3x text-success mb-3"></i>
+                        <h5>200 KLD DAF Supply</h5>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="service-card text-center">
+                        <i class="fa fa-recycle fa-3x text-success mb-3"></i>
+                        <h5>500 KLD Wastewater Recycling</h5>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="py-5 bg-light">
-        <div class="container">
-            <div class="text-center mb-5" data-aos="fade-up">
-                <h2 class="section-title">Our Solutions</h2>
-            </div>
-            <div class="row g-4">
-                <div class="col-6 col-md-3" data-aos="zoom-in" data-aos-delay="100">
-                    <a href="#etp" class="service-card">
-                        <i class="fas fa-water"></i>
-                        <h5>ETP Plant</h5>
-                    </a>
-                </div>
-                <div class="col-6 col-md-3" data-aos="zoom-in" data-aos-delay="200">
-                    <a href="#stp" class="service-card">
-                        <i class="fas fa-leaf"></i>
-                        <h5>STP Solutions</h5>
-                    </a>
-                </div>
-                <div class="col-6 col-md-3" data-aos="zoom-in" data-aos-delay="300">
-                    <a href="#biodigester" class="service-card">
-                        <i class="fas fa-burn"></i>
-                        <h5>Bio-Digester</h5>
-                    </a>
-                </div>
-                <div class="col-6 col-md-3" data-aos="zoom-in" data-aos-delay="400">
-                    <a href="#ro" class="service-card">
-                        <i class="fas fa-tint"></i>
-                        <h5>RO & Recycling</h5>
-                    </a>
-                </div>
-                <div class="col-6 col-md-3" data-aos="zoom-in" data-aos-delay="500">
-                    <a href="#om" class="service-card">
-                        <i class="fas fa-tools"></i>
-                        <h5>O&M Services</h5>
-                    </a>
-                </div>
-                <div class="col-6 col-md-3" data-aos="zoom-in" data-aos-delay="600">
-                    <a href="#chemicals" class="service-card">
-                        <i class="fas fa-flask"></i>
-                        <h5>Chemicals</h5>
-                    </a>
-                </div>
-                <div class="col-6 col-md-3" data-aos="zoom-in" data-aos-delay="700">
-                    <a href="#equipment" class="service-card">
-                        <i class="fas fa-cogs"></i>
-                        <h5>Equipment</h5>
-                    </a>
-                </div>
-                <div class="col-6 col-md-3" data-aos="zoom-in" data-aos-delay="800">
-                    <a href="#lab" class="service-card">
-                        <i class="fas fa-microscope"></i>
-                        <h5>Lab</h5>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <div class="container mt-5" id="services">
-        
-        <div id="etp" class="product-section" data-aos="fade-up">
-            <h3 class="fw-bold text-dark">Effluent Treatment Plant (ETP)</h3>
-            <img src="images/4etp.jpeg" alt="ETP Plant" class="product-img">
-            <p>Design, engineering, supply, installation, commissioning and O&M services for industrial wastewater treatment with customized solutions.</p>
-            <a href="#contact" class="btn btn-primary">Inquire Now</a>
-        </div>
-
-        <div id="stp" class="product-section" data-aos="fade-up">
-            <h3 class="fw-bold text-dark">Sewage Treatment Plant (STP)</h3>
-            <img src="images/9stp.jpeg" alt="STP Plant" class="product-img">
-            <p>Complete STP solutions using MBBR, SBR and ASP technologies for commercial and institutional applications.</p>
-            <a href="#contact" class="btn btn-primary">Inquire Now</a>
-        </div>
-
-        <div id="biodigester" class="product-section" data-aos="fade-up">
-            <h3 class="fw-bold text-dark">Anaerobic Bio-Digester (Waste to Energy)</h3>
-            <img src="images/1biogas.jpeg" alt="Bio Digester" class="product-img">
-            <p>End-to-end waste-to-energy solutions converting organic waste and high-COD wastewater into biogas with long-term O&M support.</p>
-            <a href="#contact" class="btn btn-primary">Inquire Now</a>
-        </div>
-
-        <div id="ro" class="product-section" data-aos="fade-up">
-            <h3 class="fw-bold text-dark">RO Plants & Water Recycling</h3>
-            <img src="images/7roplant.jpeg" alt="RO Plant" class="product-img">
-            <p>Industrial RO systems and treated water recycling solutions for process reuse and water conservation.</p>
-            <a href="#contact" class="btn btn-primary">Inquire Now</a>
-        </div>
-
-        <div id="om" class="product-section" data-aos="fade-up">
-            <h3 class="fw-bold text-dark">O&M and AMC Services</h3>
-            <img src="images/2amc.jpeg" alt="O&M Services" class="product-img">
-            <p>Complete plant operation, maintenance, troubleshooting, manpower supply and annual maintenance contracts.</p>
-            <a href="#contact" class="btn btn-primary">Inquire Now</a>
-        </div>
-
-        <div id="chemicals" class="product-section" data-aos="fade-up">
-            <h3 class="fw-bold text-dark">Chemicals Supply</h3>
-            <img src="images/3chemicals.png" alt="Chemicals" class="product-img">
-            <p>Supply of ETP, STP, RO, cooling tower and boiler water treatment chemicals.</p>
-            <a href="#contact" class="btn btn-primary">Inquire Now</a>
-        </div>
-
-        <div id="equipment" class="product-section" data-aos="fade-up">
-            <h3 class="fw-bold text-dark">Electromechanical Equipment Supply</h3>
-            <img src="images/5electromechanical.png" alt="Spares" class="product-img">
-            <p>Pumps, blowers, agitators, dosing systems, panels, instruments and spares.</p>
-            <a href="#contact" class="btn btn-primary">Inquire Now</a>
-        </div>
-
-         <div id="lab" class="product-section" data-aos="fade-up">
-            <h3 class="fw-bold text-dark">Laboratory Equipment</h3>
-            <img src="images/6laboratory.png" alt="Lab" class="product-img">
-            <p>Water & wastewater testing instruments with supply and servicing support.</p>
-            <a href="#contact" class="btn btn-primary">Inquire Now</a>
-        </div>
-    </div>
-
-    <section id="projects" class="py-5 bg-light">
-        <div class="container" data-aos="fade-up">
-            <div class="text-center mb-4">
-                <h2 class="section-title">Key Projects</h2>
-            </div>
-            <div class="row justify-content-center">
-                <div class="col-md-8">
-                    <div class="project-item"><i class="fas fa-check text-primary me-2"></i> 10 MTD Bio-Digester (Methanogenic Plant Project)</div>
-                    <div class="project-item"><i class="fas fa-check text-primary me-2"></i> 200 KLD ETP plant Upgradation</div>
-                    <div class="project-item"><i class="fas fa-check text-primary me-2"></i> 100 KLD STP plant supply</div>
-                    <div class="project-item"><i class="fas fa-check text-primary me-2"></i> 200 KLD DAF Supply</div>
-                    <div class="project-item"><i class="fas fa-check text-primary me-2"></i> 500 KLD Wastewater recycling plant</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="gallery" class="py-5">
-        <div class="container">
-            <div class="text-center mb-4" data-aos="fade-up">
-                <h2 class="section-title">Project Gallery</h2>
-            </div>
-            <div class="row g-2">
-                <script>
-                    for(let i=1; i<=17; i++) {
-                        document.write(`
-                            <div class="col-4 col-sm-3 col-md-2" data-aos="fade-up" data-aos-delay="${i*50}">
-                                <a href="images/onborading${i}.jpg" data-lightbox="project-gallery">
-                                    <img src="images/onborading${i}.jpg" class="gallery-img" alt="Project Image ${i}">
-                                </a>
-                            </div>
-                        `);
-                    }
-                </script>
-            </div>
-        </div>
-    </section>
-
-    <section id="clients" class="py-5 bg-white">
-        <div class="container text-center mb-4">
-            <h2 class="section-title centered-section">Our Esteemed Clients</h2>
-        </div>
-        <div class="marquee-container">
-            <div class="marquee-content">
-                <script>
-                    for(let i=1; i<=14; i++) {
-                        document.write(`<img src="images/logo${i}.png" class="client-logo" alt="Client ${i}">`);
-                    }
-                    // Repeat for continuous loop
-                    for(let i=1; i<=14; i++) {
-                        document.write(`<img src="images/logo${i}.png" class="client-logo" alt="Client ${i}">`);
-                    }
-                </script>
-            </div>
-        </div>
-    </section>
-
-    <section id="contact" class="py-5">
+    <section class="py-5">
         <div class="container">
             <div class="row">
-                <div class="col-md-6 mb-4" data-aos="fade-right">
-                    <div class="contact-box h-100">
-                        <h3>Contact Us</h3>
-                        <p>Fill the form below or call us directly.</p>
-                        
-                        <form action="https://formspree.io/f/xbjnqylz" method="POST"> 
-                            <div class="mb-3">
-                                <input type="text" name="name" class="form-control" placeholder="Your Name" required>
-                            </div>
-                            <div class="mb-3">
-                                <input type="text" name="company" class="form-control" placeholder="Company Name" required>
-                            </div>
-                            <div class="mb-3">
-                                <input type="tel" name="phone" class="form-control" placeholder="Phone / WhatsApp" required>
-                            </div>
-                            <div class="mb-3">
-                                <select name="service" class="form-control">
-                                    <option value="" disabled selected>Service Required</option>
-                                    <option>ETP Plant</option>
-                                    <option>STP Plant</option>
-                                    <option>Bio-Digester</option>
-                                    <option>RO Plant</option>
-                                    <option>O&M Services</option>
-                                    <option>Chemicals</option>
-                                    <option>Others</option>
-                                </select>
-                            </div>
-                            <div class="mb-3">
-                                <textarea name="message" class="form-control" rows="3" placeholder="Requirement Message"></textarea>
-                            </div>
-                            <button type="submit" class="btn-submit">SEND INQUIRY</button>
-                        </form>
-                    </div>
+                <div class="col-md-6" data-aos="fade-right">
+                   <img src="images/onborading15.jpg" alt="Why Choose Us" class="img-fluid rounded">
                 </div>
-
                 <div class="col-md-6" data-aos="fade-left">
-                    <div class="card h-100 border-0 shadow-sm">
-                        <div class="card-body">
-                            <h4><i class="fas fa-map-marker-alt text-primary"></i> Contact Us</h4>
-                            <p>
-                                <strong>WBT Enviro Solutions Pvt Ltd</strong><br>
-                                B-20A, Globus-D, Block-H1A,<br>
-                                Sector-63, Noida – 201305<br>
-                                NCR, India
-                            </p>
-                            <p><i class="fas fa-phone-alt text-primary"></i> <strong>+91-8019257901</strong></p>
-                            <p><i class="fas fa-phone text-primary"></i> 120-4957760</p>
-                            <p><i class="fas fa-envelope text-primary"></i> info@wbtenviro.com</p>
-                            <p><i class="fas fa-envelope text-primary"></i> solutions@wbtenviro.com</p>
-                            
-                            <div class="map-container mt-3">
-                                <iframe 
-                                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3502.049479155097!2d77.3798993!3d28.6282813!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390ce54dd4665a59%3A0x7d2873c52e12e10!2sSector%2063%2C%20Noida%2C%20Uttar%20Pradesh!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin" 
-                                    allowfullscreen="" loading="lazy">
-                                </iframe>
-                                <div class="mt-2 text-center">
-                                    <a href="https://share.google/eGbbpSxuL2ypW2TsC" target="_blank" class="btn btn-outline-secondary btn-sm">
-                                        <i class="fas fa-location-arrow"></i> Open in Google Maps
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <h2 class="section-title">Why Choose Us</h2>
+                    <ul class="choose-list mt-3">
+                        <li><i class="fa fa-check-circle"></i> Specialized in water & wastewater treatment</li>
+                        <li><i class="fa fa-check-circle"></i> Strong design & execution capability</li>
+                        <li><i class="fa fa-check-circle"></i> Experienced O&M and service team</li>
+                        <li><i class="fa fa-check-circle"></i> Reliable equipment & chemical supply</li>
+                        <li><i class="fa fa-check-circle"></i> Focus on long-term plant performance</li>
+                    </ul>
                 </div>
             </div>
         </div>
     </section>
 
-    <footer class="bg-dark text-white text-center py-3">
-        <p class="m-0">© 2024 WBT Enviro Solutions Pvt Ltd. All Rights Reserved.</p>
+    <section id="gallery" class="py-5 bg-light">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-title" data-aos="fade-right">Project Gallery</h2>
+            </div>
+            <div class="row">
+                <div class="col-md-3 col-6" data-aos="zoom-in"><img src="images/onborading1.jpg" class="gallery-img" alt="Project 1"></div>
+                <div class="col-md-3 col-6" data-aos="zoom-in"><img src="images/onborading2.jpg" class="gallery-img" alt="Project 2"></div>
+                <div class="col-md-3 col-6" data-aos="zoom-in"><img src="images/onborading3.jpg" class="gallery-img" alt="Project 3"></div>
+                <div class="col-md-3 col-6" data-aos="zoom-in"><img src="images/onborading4.jpg" class="gallery-img" alt="Project 4"></div>
+                <div class="col-md-3 col-6" data-aos="zoom-in"><img src="images/onborading5.jpg" class="gallery-img" alt="Project 5"></div>
+                <div class="col-md-3 col-6" data-aos="zoom-in"><img src="images/onborading6.jpg" class="gallery-img" alt="Project 6"></div>
+                <div class="col-md-3 col-6" data-aos="zoom-in"><img src="images/onborading7.jpg" class="gallery-img" alt="Project 7"></div>
+                <div class="col-md-3 col-6" data-aos="zoom-in"><img src="images/onborading8.jpg" class="gallery-img" alt="Project 8"></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-5">
+        <div class="container text-center">
+            <h2 class="section-title" data-aos="fade-up">Our Esteemed Clients</h2>
+            <div class="row justify-content-center align-items-center mt-4" data-aos="fade-up">
+                <div class="col-4 col-md-2"><img src="images/logo1.png" class="client-logo" alt="Client"></div>
+                <div class="col-4 col-md-2"><img src="images/logo6.png" class="client-logo" alt="Client"></div>
+                <div class="col-4 col-md-2"><img src="images/logo13.png" class="client-logo" alt="Client"></div>
+                <div class="col-4 col-md-2"><img src="images/logo14.png" class="client-logo" alt="Client"></div>
+                </div>
+        </div>
+    </section>
+
+    <section id="contact" class="py-5 bg-dark text-white">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="text-white">Contact Us</h2>
+            </div>
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <h5>Get In Touch</h5>
+                    <p><i class="fa fa-map-marker-alt me-2"></i> Mumbai, Maharashtra, India</p>
+                    <p><i class="fa fa-phone-alt me-2"></i> +91-8019257901</p>
+                    <p><i class="fa fa-envelope me-2"></i> info@wbtenviro.com</p>
+                </div>
+                <div class="col-md-6">
+                    <form action="https://formspree.io/f/xbjnqylz" method="POST">
+                        <div class="mb-3">
+                            <input type="text" name="name" class="form-control" placeholder="Your Name" required>
+                        </div>
+                        <div class="mb-3">
+                            <input type="email" name="email" class="form-control" placeholder="Your Email" required>
+                        </div>
+                        <div class="mb-3">
+                            <input type="text" name="phone" class="form-control" placeholder="Your Phone Number" required>
+                        </div>
+                        <div class="mb-3">
+                            <textarea name="message" class="form-control" rows="4" placeholder="Your Message" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-success w-100">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 WBT Enviro Solutions Pvt Ltd. All Rights Reserved.</p>
+            
+            <div class="footer-credit">
+                This website developed by <a href="https://www.knoxit.in" target="_blank">www.knoxit.in</a>
+            </div>
+        </div>
     </footer>
 
-    <a href="https://wa.me/918019257901?text=Hello,%20I%20am%20interested%20in%20water%20%26%20wastewater%20treatment%20solutions." class="floating-whatsapp" target="_blank">
-        <i class="fab fa-whatsapp"></i> Chat Now
+    <a href="https://wa.me/918019257901" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp fa-lg"></i> Chat Now
     </a>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
-
     <script>
         // Initialize Animation
         AOS.init({
             duration: 1000,
             once: true
-        });
-
-        // Smooth scroll for anchors
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                if(this.getAttribute('href') !== "#") {
-                    e.preventDefault();
-                    document.querySelector(this.getAttribute('href')).scrollIntoView({
-                        behavior: 'smooth'
-                    });
-                }
-            });
         });
     </script>
 </body>
