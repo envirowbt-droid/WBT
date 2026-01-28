@@ -22,6 +22,8 @@
         /* Top Bar */
         .top-bar { background-color: var(--primary-color); color: white; padding: 10px 0; font-size: 0.9rem; }
         .top-bar a { color: white; text-decoration: none; margin-right: 15px; }
+        /* Fix Icon Rotation (Sidha Karo) */
+        .fa-phone { transform: scaleX(-1); } 
 
         /* Navbar */
         .navbar-brand img { height: 70px; } 
@@ -34,9 +36,9 @@
             .navbar-nav .btn:hover { color: var(--primary-color); background: none; }
         }
 
-        /* Hero Section */
+        /* Hero Section - UPDATED IMAGE EXTENSION to .jpeg */
         .hero-section {
-            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('images/banner1.jpg');
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('images/banner1.jpeg');
             background-size: cover;
             background-position: center;
             height: 65vh;
@@ -121,11 +123,8 @@
         .btn-submit { background: var(--secondary-color); border: none; color: white; padding: 12px 30px; font-weight: bold; width: 100%; transition: 0.3s; }
         .btn-submit:hover { background: #218838; }
 
-        /* Map */
+        /* Map - Fast Load */
         .map-container iframe { width: 100%; height: 350px; border: 0; border-radius: 8px; }
-
-        /* Correct Phone Icon Rotation */
-        .fa-phone, .fa-phone-alt { transform: none !important; }
 
         /* About Text Alignment Mobile */
         .about-text { text-align: center; }
@@ -146,7 +145,7 @@
             <div>
                 <i class="fas fa-envelope me-2"></i> info@wbtenviro.com
                 <span class="mx-2">|</span>
-                <i class="fas fa-phone-alt me-2"></i> <strong>+91-8019257901</strong>
+                <i class="fas fa-phone me-2"></i> <strong>+91-8019257901</strong>
             </div>
             <div class="d-none d-md-block">
                 <span><i class="fas fa-clock me-1"></i> Mon–Sat 10:00 AM to 6:30 PM (Sun Closed)</span>
@@ -336,8 +335,8 @@
                     for(let i=1; i<=17; i++) {
                         document.write(`
                             <div class="col-4 col-sm-3 col-md-2" data-aos="zoom-in" data-aos-delay="${i*50}">
-                                <a href="images/onborading${i}.jpg" data-lightbox="project-gallery">
-                                    <img src="images/onborading${i}.jpg" class="gallery-img" alt="Project Image ${i}">
+                                <a href="images/onborading${i}.jpeg" data-lightbox="project-gallery">
+                                    <img src="images/onborading${i}.jpeg" class="gallery-img" alt="Project Image ${i}">
                                 </a>
                             </div>
                         `);
@@ -376,7 +375,6 @@
                     for(let i=1; i<=14; i++) {
                         document.write(`<img src="images/logo${i}.png" class="client-logo" alt="Client ${i}">`);
                     }
-                    // Repeat for continuous loop
                     for(let i=1; i<=14; i++) {
                         document.write(`<img src="images/logo${i}.png" class="client-logo" alt="Client ${i}">`);
                     }
@@ -393,7 +391,7 @@
                         <h3>Contact Us</h3>
                         <p>Fill the form below or call us directly.</p>
                         
-                        <form action="https://formspree.io/f/YOUR_FORMSPREE_ID" method="POST"> 
+                        <form action="https://formspree.io/f/xbdovakj" method="POST"> 
                             <div class="mb-3">
                                 <input type="text" name="name" class="form-control" placeholder="Your Name" required>
                             </div>
@@ -440,7 +438,7 @@
                             
                             <div class="map-container mt-3">
                                 <iframe 
-                                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3502.260462067756!2d77.38596647615024!3d28.62195228457065!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390ce5666f2c0505%3A0x7d6b49e830e0b388!2sWBT%20Enviro%20Solutions%20Pvt%20Ltd!5e0!3m2!1sen!2sin!4v1706420000000!5m2!1sen!2sin" 
+                                    src="https://maps.google.com/maps?q=B-20A,Globus-D,Block-H1A,Sector-63,Noida&output=embed" 
                                     allowfullscreen="" loading="lazy">
                                 </iframe>
                                 <div class="mt-2 text-center">
