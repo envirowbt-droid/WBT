@@ -17,31 +17,35 @@
             --light-bg: #f8f9fa;
         }
 
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; overflow-x: hidden; }
+        /* Fix 3: Standard Viewport settings are handled in meta tag, ensuring font size is legible */
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; overflow-x: hidden; font-size: 16px; }
 
         /* Top Bar */
         .top-bar { background-color: var(--primary-color); color: white; padding: 10px 0; font-size: 0.9rem; }
         .top-bar a { color: white; text-decoration: none; margin-right: 15px; }
-        /* Fix Icon Rotation (Sidha Karo) */
-        .fa-phone { transform: scaleX(-1); } 
+        
+        /* Fix 1: Flip Call Icon */
+        .fa-phone { transform: scaleX(-1); }
 
         /* Navbar */
         .navbar-brand img { height: 70px; } 
         .navbar { box-shadow: 0 2px 10px rgba(0,0,0,0.1); background: white; }
         
-        /* Mobile Menu Fix - Align Left */
+        /* Mobile Menu - Align Left */
         @media (max-width: 991px) {
             .navbar-nav .nav-link { text-align: left; padding-left: 0; }
             .navbar-nav .btn { display: inline-block; margin-left: 0 !important; width: 100%; text-align: left; border: none; color: rgba(0,0,0,.55); background: none; }
             .navbar-nav .btn:hover { color: var(--primary-color); background: none; }
         }
 
-        /* Hero Section - UPDATED IMAGE EXTENSION to .jpeg */
+        /* Fix 5: Banner Image Size & Position */
         .hero-section {
-            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('images/banner1.jpeg');
+            /* Using .jpeg as per your latest file update */
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('images/banner1.jpeg');
             background-size: cover;
-            background-position: center;
-            height: 65vh;
+            /* Position top to show sky/details, Height increased for 3000x2000px ratio */
+            background-position: center top; 
+            height: 75vh; 
             color: white;
             display: flex;
             align-items: center;
@@ -123,15 +127,12 @@
         .btn-submit { background: var(--secondary-color); border: none; color: white; padding: 12px 30px; font-weight: bold; width: 100%; transition: 0.3s; }
         .btn-submit:hover { background: #218838; }
 
-        /* Map - Fast Load */
+        /* Fix 2: Map - 100% Width, standard height */
         .map-container iframe { width: 100%; height: 350px; border: 0; border-radius: 8px; }
 
-        /* About Text Alignment Mobile */
-        .about-text { text-align: center; }
-        @media (max-width: 768px) {
-            .about-text { text-align: left; }
-            .hero-section { height: 50vh; }
-        }
+        /* Fix 4: About Us Alignment - Header Center, Body Left */
+        .about-heading { text-align: center; }
+        .about-body { text-align: left; }
 
         /* Footer Link */
         .dev-link { color: #aaa; text-decoration: none; font-size: 0.8rem; }
@@ -184,9 +185,9 @@
 
     <section id="about" class="py-5">
         <div class="container" data-aos="fade-up">
-            <div class="mb-4 about-text">
-                <h2 class="section-title">About Us</h2>
-                <p class="lead">WBT Enviro Solutions Pvt Ltd is a specialized engineering company focused on water and wastewater treatment solutions. We deliver end-to-end services including design, engineering, supply, installation, commissioning, O&M and AMC with strong technical and service support.</p>
+            <div class="mb-4">
+                <h2 class="section-title about-heading w-100 text-center">About Us</h2>
+                <p class="lead about-body text-start">WBT Enviro Solutions Pvt Ltd is a specialized engineering company focused on water and wastewater treatment solutions. We deliver end-to-end services including design, engineering, supply, installation, commissioning, O&M and AMC with strong technical and service support.</p>
             </div>
         </div>
     </section>
@@ -425,20 +426,24 @@
                     <div class="card h-100 border-0 shadow-sm">
                         <div class="card-body">
                             <h4><i class="fas fa-map-marker-alt text-primary"></i> Contact Us</h4>
+                            
+                            <div class="mb-3">
+                                <p class="mb-1"><i class="fas fa-phone-alt text-primary"></i> <strong>+91-8019257901</strong></p>
+                                <p class="mb-1"><i class="fas fa-phone text-primary"></i> 120-4957760</p>
+                                <p class="mb-1"><i class="fas fa-envelope text-primary"></i> info@wbtenviro.com</p>
+                                <p class="mb-3"><i class="fas fa-envelope text-primary"></i> solutions@wbtenviro.com</p>
+                            </div>
+
                             <p>
                                 <strong>WBT Enviro Solutions Pvt Ltd</strong><br>
                                 B-20A, Globus-D, Block-H1A,<br>
                                 Sector-63, Noida – 201305<br>
                                 NCR, India
                             </p>
-                            <p><i class="fas fa-phone-alt text-primary"></i> <strong>+91-8019257901</strong></p>
-                            <p><i class="fas fa-phone text-primary"></i> 120-4957760</p>
-                            <p><i class="fas fa-envelope text-primary"></i> info@wbtenviro.com</p>
-                            <p><i class="fas fa-envelope text-primary"></i> solutions@wbtenviro.com</p>
                             
                             <div class="map-container mt-3">
                                 <iframe 
-                                    src="https://maps.google.com/maps?q=B-20A,Globus-D,Block-H1A,Sector-63,Noida&output=embed" 
+                                    src="https://maps.google.com/maps?q=WBT+Enviro+Solutions+Pvt+Ltd+Sector-63+Noida&t=&z=13&ie=UTF8&iwloc=&output=embed" 
                                     allowfullscreen="" loading="lazy">
                                 </iframe>
                                 <div class="mt-2 text-center">
