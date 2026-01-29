@@ -29,7 +29,7 @@
         .top-bar { background-color: var(--primary-color); color: white; padding: 10px 0; font-size: 0.9rem; }
         .top-bar a { color: white; text-decoration: none; margin-right: 15px; }
         
-        /* FIX 8: Mobile Top Bar Center Alignment */
+        /* FIX: Mobile Top Bar Center Alignment */
         @media (max-width: 768px) {
             .top-bar .d-flex { justify-content: center !important; }
         }
@@ -118,7 +118,7 @@
         .service-card i { font-size: 2rem; color: var(--secondary-color); margin-bottom: 10px; }
         .service-card h5 { font-size: 1.1rem; font-weight: bold; }
 
-        /* Product Details */
+        /* Product Details - General Images */
         .product-section { padding: 40px 0; border-bottom: 1px solid #eee; scroll-margin-top: 100px; max-width: 900px; margin: 0 auto; text-align: center; }
         .product-img { width: 100%; max-height: 400px; object-fit: cover; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); margin-bottom: 20px; }
         
@@ -333,10 +333,10 @@
             <div id="chemCarousel" class="carousel slide mb-3" data-bs-ride="carousel" data-bs-interval="2500">
                 <div class="carousel-inner border rounded">
                     <div class="carousel-item active">
-                        <img src="images/3onechemicals.png" class="d-block w-100 product-img mb-0" alt="Chemicals 1">
+                        <img src="images/3onechemicals.png" class="d-block w-100 img-fluid" alt="Chemicals 1">
                     </div>
                     <div class="carousel-item">
-                        <img src="images/3twochemicals.png" class="d-block w-100 product-img mb-0" alt="Chemicals 2">
+                        <img src="images/3twochemicals.png" class="d-block w-100 img-fluid" alt="Chemicals 2">
                     </div>
                 </div>
             </div>
@@ -495,7 +495,7 @@
                                 <p class="mb-2"><i class="fas fa-envelope text-primary"></i> solutions@wbtenviro.com</p>
                                 
                                 <div class="d-block d-md-none text-muted border-top pt-2 mt-2">
-                                    <small><i class="fas fa-clock text-success"></i> Mon–Sat 10:00 AM to 6:30 PM<br>(Sun Closed)</small>
+                                    <small style="white-space: nowrap; font-size: 0.85rem;"><i class="fas fa-clock text-success"></i> Mon–Sat 10:00 AM to 6:30 PM (Sun Closed)</small>
                                 </div>
                             </div>
 
